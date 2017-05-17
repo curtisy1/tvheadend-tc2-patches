@@ -1,7 +1,6 @@
 # !/bin/bash
 # my first bash script, testing to automate cruel 
 # work. You might need to run this as root.
-
 echo "downloading dependencies"
 sudo apt-get install build-essential libdigest-sha-perl patchutils libproc-processtable-perl git-core bc ncurses-dev
 echo "downloading raspbian kernel headers"
