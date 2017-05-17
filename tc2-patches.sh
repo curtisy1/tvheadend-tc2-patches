@@ -36,7 +36,13 @@ echo “This takes up to an hour,”
 
 echo “Go for a walk or make some tea.”
 
-cd media_build
+cd media_build/v4l/
+
+rm -v Makefile
+
+wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/master/media_build/v4l/Makefile
+
+cd ..
 
 ./build
 
@@ -46,7 +52,7 @@ cd linux/drivers/media/usb/dvb-usb-v2/
 
 rm -v af9035.c
 
-wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/master/af9035.c
+wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/master/media_build/linux/drivers/media/usb/dvb-usb-v2/af9035.c
 
 cd ..
 
@@ -56,9 +62,9 @@ cd tuners/
 
 rm -v si2157.c si2157_priv.h
 
-wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/master/si2157.c
+wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/master/media_build/linux/drivers/media/tuners/si2157.c
 
-wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/master/si2157_priv.h
+wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/master/media_build/linux/drivers/media/tuners/si2157_priv.h
 
 cd
 
