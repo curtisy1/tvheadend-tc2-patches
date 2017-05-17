@@ -41,3 +41,4 @@ make
 echo "Finalizing setup"
 sudo make install
 echo "Setup finished, now plug in your TC2 stick and run dmesg"
+echo "What the hell?!"
