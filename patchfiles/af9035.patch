@@ -1,6 +1,6 @@
 --- af9035.c	2017-08-21 07:40:19.000000000 +0200
 +++ /home/wg/Downloads/af9035.c.txt	2018-05-12 16:31:29.493177466 +0200
-@@ -1214,8 +1214,49 @@
+@@ -1216,8 +1216,49 @@ static int it930x_frontend_attach(struct
  	struct si2168_config si2168_config;
  	struct i2c_adapter *adapter;
  
@@ -51,7 +51,7 @@
  	memset(&si2168_config, 0, sizeof(si2168_config));
  	si2168_config.i2c_adapter = &adapter;
  	si2168_config.fe = &adap->fe[0];
-@@ -2108,8 +2149,6 @@
+@@ -2110,8 +2151,6 @@ static const struct usb_device_id af9035
  	{ DVB_USB_DEVICE(USB_VID_KWORLD_2, USB_PID_CTVDIGDUAL_V2,
  		&af9035_props, "Digital Dual TV Receiver CTVDIGDUAL_V2",
  							RC_MAP_IT913X_V1) },
@@ -60,14 +60,14 @@
  	/* XXX: that same ID [0ccd:0099] is used by af9015 driver too */
  	{ DVB_USB_DEVICE(USB_VID_TERRATEC, 0x0099,
  		&af9035_props, "TerraTec Cinergy T Stick Dual RC (rev. 2)",
-@@ -2126,6 +2165,10 @@
+@@ -2128,6 +2167,10 @@ static const struct usb_device_id af9035
  	/* IT930x devices */
  	{ DVB_USB_DEVICE(USB_VID_ITETECH, USB_PID_ITETECH_IT9303,
  		&it930x_props, "ITE 9303 Generic", NULL) },
 +	{ DVB_USB_DEVICE(USB_VID_DEXATEK, 0x0100,
 +		&it930x_props, "Logilink VG0022A", NULL) },
-+    { DVB_USB_DEVICE(USB_VID_TERRATEC, 0x10b2,
-+        &it930x_props, "TerraTec Cinergy TC2 Stick", NULL) },
++	{ DVB_USB_DEVICE(USB_VID_TERRATEC, 0x10b2,
++	 	&it930x_props, "TerraTec Cinergy TC2 Stick", NULL) },
  	{ }
  };
  MODULE_DEVICE_TABLE(usb, af9035_id_table);
