@@ -1,17 +1,8 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
 /*
  * Silicon Labs Si2146/2147/2148/2157/2158 silicon tuner driver
  *
  * Copyright (C) 2014 Antti Palosaari <crope@iki.fi>
- *
- *    This program is free software; you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation; either version 2 of the License, or
- *    (at your option) any later version.
- *
- *    This program is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU General Public License for more details.
  */
 
 #ifndef SI2157_PRIV_H
@@ -30,20 +21,20 @@ enum si2157_pads {
 
 /* state struct */
 struct si2157_dev {
-        struct mutex i2c_mutex;
-        struct dvb_frontend *fe;
-        bool active;
-        bool inversion;
-        u8 chiptype;
-        u8 if_port;
-        u32 if_frequency;
-        u32 chip_id;
-        struct delayed_work stat_work;
+	struct mutex i2c_mutex;
+	struct dvb_frontend *fe;
+	unsigned int active:1;
+	unsigned int inversion:1;
+	unsigned int dont_load_firmware:1;
+	u8 chiptype;
+	u8 if_port;
+	u32 if_frequency;
+	struct delayed_work stat_work;
 
 #if defined(CONFIG_MEDIA_CONTROLLER)
-        struct media_device     *mdev;
-        struct media_entity     ent;
-        struct media_pad        pad[SI2157_NUM_PADS];
+	struct media_device	*mdev;
+	struct media_entity	ent;
+	struct media_pad	pad[SI2157_NUM_PADS];
 #endif
 
 };
@@ -51,22 +42,17 @@ struct si2157_dev {
 #define SI2157_CHIPTYPE_SI2157 0
 #define SI2157_CHIPTYPE_SI2146 1
 #define SI2157_CHIPTYPE_SI2141 2
-
-#define SI2158_A20 ('A' << 24 | 58 << 16 | '2' << 8 | '0' << 0)
-#define SI2148_A20 ('A' << 24 | 48 << 16 | '2' << 8 | '0' << 0)
-#define SI2157_A30 ('A' << 24 | 57 << 16 | '3' << 8 | '0' << 0)
-#define SI2147_A30 ('A' << 24 | 47 << 16 | '3' << 8 | '0' << 0)
-#define SI2146_A10 ('A' << 24 | 46 << 16 | '1' << 8 | '0' << 0)
+#define SI2157_CHIPTYPE_SI2177 3
 
 /* firmware command struct */
 #define SI2157_ARGLEN      30
 struct si2157_cmd {
-        u8 args[SI2157_ARGLEN];
-        unsigned wlen;
-        unsigned rlen;
+	u8 args[SI2157_ARGLEN];
+	unsigned wlen;
+	unsigned rlen;
 };
 
 #define SI2158_A20_FIRMWARE "dvb-tuner-si2158-a20-01.fw"
 #define SI2141_A10_FIRMWARE "dvb-tuner-si2141-a10-01.fw"
-
+#define SI2157_A30_FIRMWARE "dvb-tuner-si2157-a30-01.fw"
 #endif
