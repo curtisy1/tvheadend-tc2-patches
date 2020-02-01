@@ -1,73 +1,94 @@
---- af9035.c	2017-08-21 07:40:19.000000000 +0200
-+++ /home/wg/Downloads/af9035.c.txt	2018-05-12 16:31:29.493177466 +0200
-@@ -1216,8 +1216,49 @@ static int it930x_frontend_attach(struct
+--- af9035.c	2020-02-01 13:23:53.893666528 +0100
++++ af9035-mod.c	2020-02-01 13:27:52.751655400 +0100
+@@ -1215,49 +1215,49 @@
  	struct si2168_config si2168_config;
  	struct i2c_adapter *adapter;
  
 -	dev_dbg(&intf->dev, "adap->id=%d\n", adap->id);
 +	dev_dbg(&intf->dev, "%s  adap->id=%d\n", __func__, adap->id);
-+
-+	/* I2C master bus 2 clock speed 300k */
-+	ret = af9035_wr_reg(d, 0x00f6a7, 0x07);
-+	if (ret < 0)
-+		goto err;
-+
-+	/* I2C master bus 1,3 clock speed 300k */
-+	ret = af9035_wr_reg(d, 0x00f103, 0x07);
-+	if (ret < 0)
-+		goto err;
-+
-+	/* set gpio11 low */
-+	ret = af9035_wr_reg_mask(d, 0xd8d4, 0x01, 0x01);
-+	if (ret < 0)
-+		goto err;
-+
-+	ret = af9035_wr_reg_mask(d, 0xd8d5, 0x01, 0x01);
-+	if (ret < 0)
-+		goto err;
-+
-+	ret = af9035_wr_reg_mask(d, 0xd8d3, 0x01, 0x01);
-+	if (ret < 0)
-+		goto err;
  
-+	/* Tuner enable using gpiot2_en, gpiot2_on and gpiot2_o (reset) */
-+	ret = af9035_wr_reg_mask(d, 0xd8b8, 0x01, 0x01);
-+	if (ret < 0)
-+		goto err;
+-	/* I2C master bus 2 clock speed 366k */
+-	ret = af9035_wr_reg(d, 0x00f6a7, I2C_SPEED_366K);
+-	if (ret < 0)
+-		goto err;
+-
+-	/* I2C master bus 1,3 clock speed 366k */
+-	ret = af9035_wr_reg(d, 0x00f103, I2C_SPEED_366K);
+-	if (ret < 0)
+-		goto err;
+-
+-	/* set gpio11 low */
+-	ret = af9035_wr_reg_mask(d, 0xd8d4, 0x01, 0x01);
+-	if (ret < 0)
+-		goto err;
+-
+-	ret = af9035_wr_reg_mask(d, 0xd8d5, 0x01, 0x01);
+-	if (ret < 0)
+-		goto err;
+-
+-	ret = af9035_wr_reg_mask(d, 0xd8d3, 0x01, 0x01);
+-	if (ret < 0)
+-		goto err;
+-
+-	/* Tuner enable using gpiot2_en, gpiot2_on and gpiot2_o (reset) */
+-	ret = af9035_wr_reg_mask(d, 0xd8b8, 0x01, 0x01);
+-	if (ret < 0)
+-		goto err;
+-
+-	ret = af9035_wr_reg_mask(d, 0xd8b9, 0x01, 0x01);
+-	if (ret < 0)
+-		goto err;
+-
+-	ret = af9035_wr_reg_mask(d, 0xd8b7, 0x00, 0x01);
+-	if (ret < 0)
+-		goto err;
+-
+-	msleep(200);
+-
+-	ret = af9035_wr_reg_mask(d, 0xd8b7, 0x01, 0x01);
+-	if (ret < 0)
+-		goto err;
++	/* I2C master bus 2 clock speed 300k */
++  ret = af9035_wr_reg(d, 0x00f6a7, 0x07);
++  if (ret < 0)
++    goto err;
 +
-+	ret = af9035_wr_reg_mask(d, 0xd8b9, 0x01, 0x01);
-+	if (ret < 0)
-+		goto err;
++  /* I2C master bus 1,3 clock speed 300k */
++  ret = af9035_wr_reg(d, 0x00f103, 0x07);
++  if (ret < 0)
++    goto err;
 +
-+	ret = af9035_wr_reg_mask(d, 0xd8b7, 0x00, 0x01);
-+	if (ret < 0)
-+		goto err;
++  /* set gpio11 low */
++  ret = af9035_wr_reg_mask(d, 0xd8d4, 0x01, 0x01);
++  if (ret < 0)
++    goto err;
 +
-+	msleep(200);
++  ret = af9035_wr_reg_mask(d, 0xd8d5, 0x01, 0x01);
++  if (ret < 0)
++    goto err;
 +
-+	ret = af9035_wr_reg_mask(d, 0xd8b7, 0x01, 0x01);
-+	if (ret < 0)
-+		goto err;
++  ret = af9035_wr_reg_mask(d, 0xd8d3, 0x01, 0x01);
++  if (ret < 0)
++    goto err;
++
++  /* Tuner enable using gpiot2_en, gpiot2_on and gpiot2_o (reset) */
++  ret = af9035_wr_reg_mask(d, 0xd8b8, 0x01, 0x01);
++  if (ret < 0)
++    goto err;
++
++  ret = af9035_wr_reg_mask(d, 0xd8b9, 0x01, 0x01);
++  if (ret < 0)
++    goto err;
++
++  ret = af9035_wr_reg_mask(d, 0xd8b7, 0x00, 0x01);
++  if (ret < 0)
++    goto err;
++
++  msleep(200);
++
++  ret = af9035_wr_reg_mask(d, 0xd8b7, 0x01, 0x01);
++  if (ret < 0)
++    goto err;
+ 
  	memset(&si2168_config, 0, sizeof(si2168_config));
  	si2168_config.i2c_adapter = &adapter;
- 	si2168_config.fe = &adap->fe[0];
-@@ -2110,8 +2151,6 @@ static const struct usb_device_id af9035
- 	{ DVB_USB_DEVICE(USB_VID_KWORLD_2, USB_PID_CTVDIGDUAL_V2,
- 		&af9035_props, "Digital Dual TV Receiver CTVDIGDUAL_V2",
- 							RC_MAP_IT913X_V1) },
--	{ DVB_USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_T1,
--		&af9035_props, "TerraTec T1", RC_MAP_IT913X_V1) },
- 	/* XXX: that same ID [0ccd:0099] is used by af9015 driver too */
- 	{ DVB_USB_DEVICE(USB_VID_TERRATEC, 0x0099,
- 		&af9035_props, "TerraTec Cinergy T Stick Dual RC (rev. 2)",
-@@ -2128,6 +2167,10 @@ static const struct usb_device_id af9035
- 	/* IT930x devices */
- 	{ DVB_USB_DEVICE(USB_VID_ITETECH, USB_PID_ITETECH_IT9303,
- 		&it930x_props, "ITE 9303 Generic", NULL) },
-+	{ DVB_USB_DEVICE(USB_VID_DEXATEK, 0x0100,
-+		&it930x_props, "Logilink VG0022A", NULL) },
-+	{ DVB_USB_DEVICE(USB_VID_TERRATEC, 0x10b2,
-+	 	&it930x_props, "TerraTec Cinergy TC2 Stick", NULL) },
- 	{ }
- };
- MODULE_DEVICE_TABLE(usb, af9035_id_table);
