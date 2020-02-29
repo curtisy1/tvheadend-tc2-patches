@@ -40,7 +40,7 @@ rm -v si2157.c
 rm -v si2157_priv.h
 wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/pre-changes/media_build/linux/drivers/media/tuners/si2157.c
 wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/pre-changes/media_build/linux/drivers/media/tuners/si2157_priv.h
-cd
+cd ~/tvheadend-tc2-patches
 cd media_build
 
 echo "Done patching files, next step will take ~1h again."
