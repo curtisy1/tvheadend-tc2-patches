@@ -24,8 +24,8 @@ cd ..
 
 echo "Done. On to the hard part. This takes up to an hour, go for a walk or drink some tea."
 cd media_build/v4l
-rm -v Makefile
-wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/pre-changes/media_build/v4l/Makefile
+# rm -v Makefile
+# wget https://raw.githubusercontent.com/curtisy1/tvheadend-tc2-patches/pre-changes/media_build/v4l/Makefile
 cd ..
 ./build
 
