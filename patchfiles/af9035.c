@@ -1213,8 +1213,7 @@ static int it930x_frontend_attach(struct dvb_usb_adapter *adap)
 	struct dvb_usb_device *d = adap_to_d(adap);
 	struct usb_interface *intf = d->intf;
 	int ret;
-	struct si2168_config si2168_config;
-	struct i2c_adapter *adapter;
+	struct si2157_config si2157_config;
 
 	dev_dbg(&intf->dev, "adap->id=%d\n", adap->id);
 
